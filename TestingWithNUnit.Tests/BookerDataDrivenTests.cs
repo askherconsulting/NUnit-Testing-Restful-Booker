@@ -64,7 +64,7 @@ namespace TestingWithNUnit.Tests
             adminPage.AddRoom(room);
 
             var rooms = adminPage.GetRooms();
-            var createdRoom = rooms.First(r => r.Number == room.Number);
+            var createdRoom = rooms.Last(r => r.Number == room.Number);
             
             Assert.That(rooms.Count, Is.GreaterThan(originalRoomsCount));
             Assert.That(createdRoom.Price, Is.EqualTo(room.Price));
@@ -91,7 +91,7 @@ namespace TestingWithNUnit.Tests
             adminPage.AddRoom(room);
 
             var rooms = adminPage.GetRooms();
-            var createdRoom = rooms.First(r => r.Number == room.Number);
+            var createdRoom = rooms.Last(r => r.Number == room.Number);
 
             Assert.Multiple(() =>
             {
@@ -115,7 +115,7 @@ namespace TestingWithNUnit.Tests
 
             
             var rooms = adminPage.GetRooms();
-            var createdRoom = rooms.First(r => r.Number == room.Number);
+            var createdRoom = rooms.Last(r => r.Number == room.Number);
 
             Assert.Multiple(() =>
             {
@@ -170,7 +170,7 @@ namespace TestingWithNUnit.Tests
         [Test]
         public void AddRoom(
             [Values("9","999")]string roomNumber,
-            [Values("100","1000")] string Price,
+            [Values("100")] string Price,
             [Values]bool accessible,[Values] RoomType roomType)
         {
             var originalRoomsCount = adminPage.GetRooms().Count;
@@ -198,8 +198,8 @@ namespace TestingWithNUnit.Tests
         [Test]
         [Pairwise]
         public void AddRoomWithValues(
-            [Values("9","999")]string roomNumber,
-            [Values("100","1000")] string Price,
+            [Values("9")]string roomNumber,
+            [Values("100","999")] string Price,
             [Values]bool accessible,[Values] RoomType roomType)
         {
             var originalRoomsCount = adminPage.GetRooms().Count;
@@ -223,32 +223,7 @@ namespace TestingWithNUnit.Tests
             Assert.That(createdRoom.Accessible, Is.EqualTo(room.Accessible));
         }
 
-        
-        [Test]
-        public void AddRoomUsingValueSource([ValueSource("RoomData")] Room room)
-        {
-            
-            var originalRoomsCount = adminPage.GetRooms().Count;
-            
-            adminPage.AddRoom(room);
-
-            var rooms = adminPage.GetRooms();
-            var createdRoom = rooms.Last(r => r.Number == room.Number);
-
-            Assert.Multiple(() =>
-            {
-                Assert.That(rooms.Count, Is.GreaterThan(originalRoomsCount));
-                Assert.That(createdRoom.Price, Is.EqualTo(room.Price));
-                Assert.That(createdRoom.Accessible, Is.EqualTo(room.Accessible));
-                Assert.That(createdRoom.HasWifi, Is.EqualTo(room.HasWifi));
-                Assert.That(createdRoom.HasView, Is.EqualTo(room.HasView));
-                Assert.That(createdRoom.HasRadio, Is.EqualTo(room.HasRadio));
-                Assert.That(createdRoom.HasRefreshments, Is.EqualTo(room.HasRefreshments));
-                Assert.That(createdRoom.HasSafe, Is.EqualTo(room.HasSafe));
-                Assert.That(createdRoom.HasTelevision, Is.EqualTo(room.HasTelevision));
-            });
-        }
-        
+      
         
         [TestCaseSource(typeof(TestData),nameof(TestData.RoomInfo))]
         public void AddRoomUsingTestCaseSource(string roomNumber, string price, RoomType roomType)

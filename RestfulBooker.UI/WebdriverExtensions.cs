@@ -6,7 +6,7 @@ namespace RestfulBooker.UI
 {
     public static class WebDriverExtensions
     {
-        public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds=5)
+        public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds=10)
         {
             if (timeoutInSeconds > 0)
             {
@@ -24,7 +24,7 @@ namespace RestfulBooker.UI
             }
         }
         
-        public static void WaitFor(this IWebDriver driver, Func<IWebDriver,bool> condition, int timeoutInSeconds=5)
+        public static void WaitFor(this IWebDriver driver, Func<IWebDriver,bool> condition, int timeoutInSeconds=10)
         {
             if (timeoutInSeconds > 0)
             {

@@ -19,6 +19,7 @@ namespace TestingWithNUnit.Tests
             
             _adminPage = new AdminPage(driver);
             _adminPage.Login();
+            
         }
 
         
@@ -50,7 +51,7 @@ namespace TestingWithNUnit.Tests
 
             var rooms = _adminPage.GetRooms();
             var createdRoom = rooms.Last(r => r.Number == room.Number);
-            //note that these tests do not pass sequentially due to a bug in restful booker that I have raised
+           
             Assert.That(rooms.Count, Is.GreaterThan(originalRoomsCount));
             Assert.That(createdRoom.Price, Is.EqualTo(createdRoom.Price));
             Assert.That(createdRoom.Accessible, Is.EqualTo(room.Accessible));

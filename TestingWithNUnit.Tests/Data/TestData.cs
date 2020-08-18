@@ -33,15 +33,12 @@ namespace TestingWithNUnit.Tests.Data
 
         }
         
+        //note you may wish to add boundary/negative test cases here with appropriate error handling logic e.g. 88.00, £88
         public static string[] CurrencyStrings()
         {
             return new[]
             {
-                "88",
-                "$88",
-                "88.00",
-                "88,00",
-                "88 00",
+                "88"
             };
         }
         

@@ -17,6 +17,7 @@ namespace RestfulBooker.UI.Pages
         {
             _driver = driver;
             _driver.Navigate().GoToUrl(adminUrl);
+            _driver.Manage().Window.Maximize();
             HandleWelcomeMessage();
 
         }
@@ -112,6 +113,7 @@ namespace RestfulBooker.UI.Pages
 
         public IReadOnlyList<Room> GetRooms()
         {
+          
             var roomsListSelector = By.CssSelector("[data-type='room']");
             _driver.WaitFor(drv=>drv.FindElement(roomsListSelector).Displayed==true);
             

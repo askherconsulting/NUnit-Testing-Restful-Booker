@@ -39,7 +39,7 @@ namespace RestfulBooker.Api.Services
         public Booking GetBooking(int id)
         { 
             var path = $"{ServiceEndPoint}/{id}";
-            var request= new RestRequest(path);
+            var request= new RestRequest(ServiceEndPoint);
             var response = _client.Get<Booking>(request);
             return response.Data;
 
